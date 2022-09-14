@@ -5,24 +5,28 @@ import axios from "axios";
 
 export default function PostDetail() {
   const router = useRouter();
-  const number = router.query.id;
-  const [PostDesc, setPostDesc] = useState('');
-  const [Postsub, setPostsub] = useState('');
+  const {id} = router.query;
+  const [title , setTitle] = useState("");
+  const [post, setPost] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/${number}`)
-      .then((res) => {
-        setPostDesc(res.data.desc);
-        setPostsub(res.data.name);
-      }
-      )
-  }, [number]);
+    if (id) {
+      axios.get(`/api/${id}`).then((res) => {
+        console.log(res.data);
+        setTitle(res.data.name);
+        setPost(res.data.desc);
+      });
+    }
+  }, [id]);
+
+  const [PostDesc, setPostDesc] = useState('');
+  const [Postsub, setPostsub] = useState('');
 
   return (
     <div>
       <li><a href="/post">Post</a></li>
-      <h1>{Postsub}</h1>
-      <p>{PostDesc}</p>
+      <h1>{title}</h1>
+      <p>{post}</p>
     </div>
   )
 }
