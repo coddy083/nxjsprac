@@ -19,9 +19,6 @@ export default function PostDetail() {
     }
   }, [id]);
 
-  const [PostDesc, setPostDesc] = useState('');
-  const [Postsub, setPostsub] = useState('');
-
   return (
     <div>
       <li><a href="/post">Post</a></li>
