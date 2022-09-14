@@ -10,7 +10,7 @@ export default function PostDetail() {
   const [Postsub, setPostsub] = useState('');
 
   useEffect(() => {
-    axios.get(`/api/${number}`)
+    axios.get(`http://localhost:3000/api/${number}`)
       .then((res) => {
         setPostDesc(res.data.desc);
         setPostsub(res.data.name);
