@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 export default function PostDetail() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function PostDetail() {
 
   return (
     <div>
-      <li><a href="/post">Post</a></li>
+      <Link href="/post">Post</Link>
       <h1>{post.name}</h1>
       <p>{post.desc}</p>
       <button
