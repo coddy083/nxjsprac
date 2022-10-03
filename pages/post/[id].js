@@ -5,16 +5,26 @@ import axios from "axios";
 
 export default function PostDetail() {
   const router = useRouter();
-  const {id} = router.query;
-  const [title , setTitle] = useState("");
-  const [post, setPost] = useState(null);
+  const { id } = router.query;
+  const [post, setPost] = useState({
+    id: "",
+    name: "",
+    desc: "",
+  });
+  const [ButtonText, setButtonText] = useState("Update");
+
+  const ButtonCLick = () => {
+    setButtonText("Updating...");
+    setTimeout(() => {
+      setButtonText("Complete");
+    }, 1000);
+  };
 
   useEffect(() => {
     if (id) {
       axios.get(`/api/${id}`).then((res) => {
         console.log(res.data);
-        setTitle(res.data.name);
-        setPost(res.data.desc);
+        setPost(res.data);
       });
     }
   }, [id]);
@@ -22,8 +32,11 @@ export default function PostDetail() {
   return (
     <div>
       <li><a href="/post">Post</a></li>
-      <h1>{title}</h1>
-      <p>{post}</p>
+      <h1>{post.name}</h1>
+      <p>{post.desc}</p>
+      <button
+        {...(ButtonText === "Updating..." && { disabled: true })}
+        onClick={ButtonCLick}>{ButtonText}</button>
     </div>
   )
 }
