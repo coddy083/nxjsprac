@@ -22,6 +22,7 @@ export default function PostDetail() {
   };
 
   useEffect(() => {
+    console.log(id);
     if (id) {
       axios.get(`/api/${id}`).then((res) => {
         console.log(res.data);
